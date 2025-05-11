@@ -11,19 +11,12 @@
 </head>
 
 <body>
-    <header class="header">
-        <div class="header__inner">
-            <a class="header__logo" href="/">
-                Contact Form
-            </a>
-        </div>
-    </header>
-
     <main>
         <div class="thanks__content">
             <div class="thanks__heading">
                 <h2>お問い合わせありがとうございます</h2>
             </div>
+            <button class="form__button-submit" type=" submit">HOME</button>
         </div>
     </main>
 </body>
