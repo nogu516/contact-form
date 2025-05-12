@@ -33,10 +33,12 @@
                     </div>
                     <div class="form__group-content">
                         <div class="form__input--text">
-                            <input type="text" name="name" placeholder="山田太郎" />
+                            <input type="text" name="name" placeholder="山田太郎" value="{{ old('name') }}" />
                         </div>
                         <div class="form__error">
-                            <!--バリデーション機能を実装したら記述します。-->
+                            @error('name')
+                            {{ $message }}
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -47,10 +49,12 @@
                     </div>
                     <div class="form__group-content">
                         <div class="form__input--text">
-                            <input type="email" name="email" placeholder="test@example.com" />
+                            <input type="email" name="email" placeholder="test@example.com" value="{{ old('email') }}" />
                         </div>
                         <div class="form__error">
-                            <!--バリデーション機能を実装したら記述します。-->
+                            @error('email')
+                            {{ $message }}
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -61,10 +65,12 @@
                     </div>
                     <div class="form__group-content">
                         <div class="form__input--text">
-                            <input type="tel" name="tel" placeholder="09012345678" />
+                            <input type="tel" name="tel" placeholder="09012345678" value="{{ old('tel') }}" />
                         </div>
                         <div class="form__error">
-                            <!--バリデーション機能を実装したら記述します。-->
+                            @error('tel')
+                            {{ $message }}
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -75,10 +81,12 @@
                     </div>
                     <div class="form__group-content">
                         <div class="form__input--text">
-                            <input type="text" name="address" placeholder="例：東京都渋谷区千駄ヶ谷1-2-3" />
+                            <input type="text" name="address" placeholder="例：東京都渋谷区千駄ヶ谷1-2-3" value="{{ old('address') }}" />
                         </div>
                         <div class="form__error">
-                            <!--バリデーション機能を実装したら記述します。-->
+                            @error('address')
+                            {{ $message }}
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -88,10 +96,7 @@
                     </div>
                     <div class="form__group-content">
                         <div class="form__input--text">
-                            <input type="text" name="build" placeholder="例：千駄ヶ谷マンション101" />
-                        </div>
-                        <div class="form__error">
-                            <!--バリデーション機能を実装したら記述します。-->
+                            <input type="text" name="build" placeholder="例：千駄ヶ谷マンション101" value="{{ old('build') }}" />
                         </div>
                     </div>
                 </div>
@@ -102,10 +107,12 @@
                     </div>
                     <div class="form__group-content">
                         <div class="form__input--text">
-                            <input type="text" name="content_type" placeholder="お問い" />
+                            <input type="text" name="content_type" placeholder="お問い" value="{{ old('content_type') }}" />
                         </div>
                         <div class="form__error">
-                            <!--バリデーション機能を実装したら記述します。-->
+                            @error('content_type')
+                            {{ $message }}
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -116,10 +123,12 @@
                     </div>
                     <div class="form__group-content">
                         <div class="form__input--textarea">
-                            <textarea name="content" placeholder="お問い合わせ内容をご記入ください"></textarea>
+                            <textarea name="content" placeholder="お問い合わせ内容をご記入ください" value="{{ old('content') }}"></textarea>
                         </div>
                         <div class="form__error">
-                            <!--バリデーション機能を実装したら記述します。-->
+                            @error('content')
+                            {{ $message }}
+                            @enderror
                         </div>
                     </div>
                 </div>
