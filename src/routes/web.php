@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +16,47 @@ use App\Http\Controllers\ContactController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {return view('welcome');});
+
 Route::get('/', [ContactController::class, 'index']);
+
+// お問い合わせフォーム画面（入力画面）
+Route::get(
+    '/contacts/create',
+    [ContactController::class, 'create']
+)->name('contacts.create');
+
 Route::post('/contacts/confirm', [ContactController::class, 'confirm'])->name('contacts.confirm');
-Route::post('/contacts', [ContactController::class, 'store']);
+
+Route::post('/contacts/store', [ContactController::class, 'store'])->name('contacts.store');
+
+// お問い合わせ一覧（管理画面など）
+Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
+
+Route::get('/register', [RegisterController::class, 'show'])->name('register.show');
+
+Route::post('/register', [RegisterController::class, 'submit'])->name('register.submit');
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+
+Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
+
+Route::get('/contacts/thanks', function () {
+    return view('contacts.thanks');
+})->name('contacts.thanks');
+
+use App\Http\Controllers\Admin\ContactController as AdminContactController;
+// 管理者用
+Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(
+    function () {
+        Route::get('/contacts', [\App\Http\Controllers\Admin\ContactController::class, 'index'])->name('contacts.index');
+    }
+);
+
+Route::get('/test', function () {
+    return view('test');
+});
+
+Route::post('/test-confirm', function () {
+    return '確認画面に遷移しました！';
+})->name('test.confirm');
