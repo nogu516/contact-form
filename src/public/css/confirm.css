@@ -1,80 +1,76 @@
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: #fff;
+    color: #8B7969;
+    margin: 0;
+    padding: 0;
+}
+
 .header {
-    background: #000;
-}
-
-.header__inner {
-    margin: 0 auto;
-    padding: 20px 15px;
-    max-width: 1230px;
-}
-
-.header__logo {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 24px;
-}
-
-.confirm__content {
-    margin: 0 auto;
-    padding: 30px 15px;
-    max-width: 1230px;
-}
-
-.confirm__heading {
-    margin-bottom: 40px;
+    border-bottom: 1px solid #E0DFDE;
+    padding: 20px;
     text-align: center;
 }
 
-.form {
-    margin: 0 auto;
-    width: 70%;
+.header__logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #8B7969;
 }
 
-.confirm-table {
-    border: 1px solid #ddd;
+.confirm__content {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.confirm__heading h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #8B7969;
 }
 
 .confirm-table__inner {
     width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    color: #8B7969;
 }
 
-.confirm-table__header {
-    padding: 15px;
-    width: 20%;
-    border-bottom: 1px solid #ddd;
-    background-color: #eee;
+.confirm-table__inner th,
+.confirm-table__inner td {
+    border: 1px solid #e0dcd7;
+    padding: 12px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.confirm-table__inner th {
+    width: 200px;
+    background-color: #F4F1EE;
     font-weight: bold;
 }
 
-.confirm-table__text {
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-}
-
-.confirm-table__text input {
-    width: 100%;
-    outline: none;
-    border: none;
-}
-
-.confirm-table__row:last-child .confirm-table__header,
-.confirm-table__row:last-child .confirm-table__text {
-    border-bottom-width: 0;
+.confirm-table__inner td {
+    background-color: #fff;
 }
 
 .form__button {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
     margin-top: 30px;
-    text-align: center;
 }
 
 .form__button-submit {
-    padding: 10px;
-    width: 30%;
-    height: 50px;
+    background-color: #8B7969;
+    color: white;
     border: none;
-    border-radius: 3px;
-    background: #000;
-    color: #fff;
+    padding: 10px 40px;
+    font-size: 14px;
     cursor: pointer;
+    border-radius: 4px;
+    text-decoration: none;
 }

@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Admin\ContactController as AdminContactController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -45,13 +47,12 @@ Route::get('/contacts/thanks', function () {
     return view('contacts.thanks');
 })->name('contacts.thanks');
 
-use App\Http\Controllers\Admin\ContactController as AdminContactController;
 // 管理者用
-Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(
-    function () {
-        Route::get('/contacts', [\App\Http\Controllers\Admin\ContactController::class, 'index'])->name('contacts.index');
-    }
-);
+Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/contacts', [AdminContactController::class, 'index'])->name('contacts.index');
+    Route::get('/contacts/{id}', [AdminContactController::class, 'show'])->name('contacts.show');
+    Route::delete('/contacts/{contact}', [AdminContactController::class, 'destroy'])->name('contacts.destroy');
+});
 
 Route::get('/test', function () {
     return view('test');

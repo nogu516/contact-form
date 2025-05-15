@@ -16,13 +16,15 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+        if (!Auth::attempt($credentials)) {
+            return back()->withErrors([
+                'email' => '認証情報が正しくありません。',
+            ])->withInput();
         }
 
-        return back()->withErrors([
-            'email' => '認証情報が正しくありません。',
-        ])->withInput();
+        $request->session()->regenerate();
+
+        // 管理者かどうかで分岐してもOK（任意）
+        return redirect()->route('admin.contacts.index');
     }
 }

@@ -14,9 +14,9 @@
     <main>
         <div class="thanks__content">
             <div class="thanks__heading">
-                <h2>お問い合わせありがとうございます</h2>
+                <h2 class="content_h2">お問い合わせありがとうございます</h2>
             </div>
-            <a href="/" class="form__button-submit">HOME</a>
+            <a href="{{ route('contacts.index') }}" class="form__button-submit">HOME</a>
         </div>
     </main>
 </body>

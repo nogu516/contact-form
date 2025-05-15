@@ -26,40 +26,59 @@
             </div>
             <form class="form" action="{{ route('contacts.store') }}" method="post">
                 @csrf
+                <input type="hidden" name="action" value="submit">
+                <input type="hidden" name="last_name" value="{{ $inputs['last_name'] }}">
+                <input type="hidden" name="first_name" value="{{ $inputs['first_name'] }}">
+                <input type="hidden" name="gender" value="{{ $inputs['gender'] }}">
+                <input type="hidden" name="email" value="{{ $inputs['email'] }}">
+                <input type="hidden" name="tel" value="{{ $inputs['tel'] }}">
+                <input type="hidden" name="address" value="{{ $inputs['address'] }}">
+                <input type="hidden" name="build" value="{{ $inputs['build'] }}">
+                <input type="hidden" name="content_type" value="{{ $inputs['content_type'] }}">
+                <input type="hidden" name="content" value="{{ $inputs['content'] }}">
+
+                <!-- 表示用 -->
                 <div class="confirm-table">
                     <table class="confirm-table__inner">
-                        <dl>
-                            <form class="form" action="{{ route('contacts.store') }}" method="post">
-                                @csrf
-                                <input type="hidden" name="action" value="submit">
-                                <input type="hidden" name="last_name" value="{{ $inputs['last_name'] }}">
-                                <input type="hidden" name="first_name" value="{{ $inputs['first_name'] }}">
-                                <input type="hidden" name="gender" value="{{ $inputs['gender'] }}">
-                                <input type="hidden" name="email" value="{{ $inputs['email'] }}">
-                                <input type="hidden" name="tel" value="{{ $inputs['tel'] }}">
-                                <input type="hidden" name="address" value="{{ $inputs['address'] }}">
-                                <input type="hidden" name="build" value="{{ $inputs['build'] }}">
-                                <input type="hidden" name="content_type" value="{{ $inputs['content_type'] }}">
-                                <input type="hidden" name="content" value="{{ $inputs['content'] }}">
-
-                                <!-- 表示用 -->
-                                <p>お名前：{{ $inputs['last_name'] }} {{ $inputs['first_name'] }}</p>
-                                <p>性別：{{ $inputs['gender'] }}</p>
-                                <p>メールアドレス：{{ $inputs['email'] }}</p>
-                                <p>電話番号：{{ $inputs['tel'] }}</p>
-                                <p>住所：{{ $inputs['address'] }}</p>
-                                <p>建物：{{ $inputs['build'] }}</p>
-                                <p>お問い合わせの種類：{{ $inputs['content_type'] }}</p>
-                                <p>お問い合わせ内容：{{ $inputs['content'] }}</p>
-
-                                <!-- ボタン -->
-                                <div class="form__button">
-                                    <button class="form__button-submit" type="submit">送信</button>
-                                    <button type="button" onclick="history.back()">修正</button>
-                                </div>
-                            </form>
-                        </dl>
+                        <tr>
+                            <th>お名前</th>
+                            <td>{{ $inputs['last_name'] }} {{ $inputs['first_name'] }}</td>
+                        </tr>
+                        <tr>
+                            <th>性別</th>
+                            <td>{{ $inputs['gender'] }}</td>
+                        </tr>
+                        <tr>
+                            <th>メールアドレス</th>
+                            <td>{{ $inputs['email'] }}</td>
+                        </tr>
+                        <tr>
+                            <th>電話番号</th>
+                            <td>{{ $inputs['tel'] }}</td>
+                        </tr>
+                        <tr>
+                            <th>住所</th>
+                            <td>{{ $inputs['address'] }}</td>
+                        </tr>
+                        <tr>
+                            <th>建物名</th>
+                            <td>{{ $inputs['build'] }}</td>
+                        </tr>
+                        <tr>
+                            <th>お問い合わせの種類</th>
+                            <td>{{ $inputs['content_type'] }}</td>
+                        </tr>
+                        <tr>
+                            <th>お問い合わせ内容</th>
+                            <td>{{ $inputs['content'] }}</td>
+                        </tr>
                     </table>
+                </div>
+
+                <!-- ボタン -->
+                <div class="form__button">
+                    <button class="form__button-submit" type="submit">送信</button>
+                    <a href="/" class="form__button-submit">修正</a>
                 </div>
             </form>
         </div>

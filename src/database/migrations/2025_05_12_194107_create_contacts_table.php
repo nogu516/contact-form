@@ -17,7 +17,7 @@ return new class extends Migration
 
             $table->string('first_name', 255);
             $table->string('last_name', 255);
-            $table->tinyInteger('gender'); // 1:男性 2:女性 3:その他
+            $table->string('gender');
 
             $table->string('email', 255);
             $table->string('tel', 255);

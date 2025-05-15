@@ -31,6 +31,8 @@ class ContactController extends Controller
 
         $contact = $request->only(['last_name', 'first_name', 'gender', 'email', 'tel', 'address', 'build', 'content_type',  'content']);
 
+        $contact['detail'] = $request->input('detail') ?: 'N/A';
+
         Contact::create($contact);
         return redirect()->route('contacts.thanks');
     }
