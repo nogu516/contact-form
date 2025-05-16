@@ -1,39 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fashionably Late</title>
-    <a href="{{ route('register.show') }}"
-        class="inline-block px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold rounded">
-        register
-    </a>
+    <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}" />
 </head>
 
 <body>
-    <h2>Login</h2>
-    <form method="POST" action="{{ route('login.submit') }}">
-        @csrf
+    <header>
+        <h1>FashionablyLate</h1>
+        <a href="{{ route('register.show') }}">register</a>
+    </header>
 
-        <div>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form method="POST" action="{{ route('login.submit') }}">
+            @csrf
+
             <label for="email">メールアドレス</label>
-            <input type="email" name="email" value="{{ old('email') }}">
+            <input type="email" name="email" value="{{ old('email') }}" placeholder="例：test@example.com">
             @error('email')
-            <div class="text-red-600">{{ $message }}</div>
+            <div class="error">{{ $message }}</div>
             @enderror
-        </div>
 
-        <div>
             <label for="password">パスワード</label>
-            <input type="password" name="password">
+            <input type="password" name="password" placeholder="例：coachtechweb">
             @error('password')
-            <div class="text-red-600">{{ $message }}</div>
+            <div class="error">{{ $message }}</div>
             @enderror
-        </div>
 
-        <button type="submit">ログイン</button>
-    </form>
+            <button type="submit">ログイン</button>
+        </form>
+    </div>
 </body>
 
 </html>

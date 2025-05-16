@@ -1,0 +1,87 @@
+/* 全体の背景とフォント */
+body {
+    background-color: #f6f0ea;
+    font-family: 'Hiragino Kaku Gothic ProN', 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #5a4a42;
+}
+
+/* ヘッダーとタイトル */
+header {
+    text-align: center;
+    padding: 30px 0 10px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #5a4a42;
+}
+
+header a {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 14px;
+    color: #b4a89f;
+    text-decoration: none;
+    border: 1px solid #d9d0c8;
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+/* 各ラベル */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #5a4a42;
+}
+
+/* 入力フィールド */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px 10px;
+    margin-bottom: 20px;
+    border: none;
+    background-color: #f9f7f5;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #444;
+}
+
+/* プレースホルダーの色 */
+input::placeholder {
+    color: #ccc;
+}
+
+/* エラー */
+.error {
+    color: red;
+    font-size: 13px;
+    margin-top: -15px;
+    margin-bottom: 15px;
+}
+
+/* 登録ボタン */
+button {
+    width: 100%;
+    background-color: #6b4f3b;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #5c4032;
+}

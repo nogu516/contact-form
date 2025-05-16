@@ -41,7 +41,7 @@ class ContactController extends Controller
             return $this->exportCSV($query->get());
         }
 
-        $contacts = Contact::orderBy('created_at', 'desc')->paginate(10);
+        $contacts = Contact::orderBy('created_at', 'desc')->paginate(7);
         return view('admin.contacts.index', compact('contacts'));
     }
 
