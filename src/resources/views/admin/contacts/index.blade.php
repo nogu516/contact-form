@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <h1 class="text-center mb-4">FashionablyLate</h1>
     <div class="container">
         <h2 class="text-center mb-4">Admin</h2>
 
@@ -37,6 +38,10 @@
             <button type="submit">検索</button>
 
             <a href="{{ route('admin.contacts.index') }}" class="btn btn-secondary">リセット</a>
+            <!-- ▼ ページネーション表示を上に -->
+            <div class="pagination-wrapper">
+                {{ $contacts->links() }}
+            </div>
         </form>
 
         <!-- 一覧テーブル -->
@@ -53,19 +58,15 @@
             <tbody>
                 @foreach($contacts as $contact)
                 <tr>
-                    <td>{{ $contact->fullname }}</td>
+                    <td>{{ $contact->last_name }} {{ $contact->first_name }}</td>
                     <td>{{ $contact->gender }}</td>
                     <td>{{ $contact->email }}</td>
-                    <td>{{ $contact->type }}</td>
+                    <td>{{ $contact->content_type }}</td>
                     <td><button class="detailBtn" data-id="{{ $contact->id }}">詳細</button></td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
-
-        <!-- ページネーション -->
-        {{ $contacts->links() }}
-        </>
 
         <!-- モーダルウィンドウ -->
         <div id="detailModal">
@@ -101,36 +102,50 @@
                             $('#modalEmail').text(data.email);
                             $('#modalType').text(data.content_type);
                             $('#modalDetail').text(data.detail);
-                            $('#detailModal').css('display', 'flex');
+                            $('#detailModal').addClass('active');
+
                         }
                     });
                 });
 
                 $('#closeModal').on('click', function() {
-                    $('#detailModal').removeClass('active');
-                });
+                    $('#detailModal').addClass('active');
 
-                $('#deleteBtn').on('click', function() {
-                    if (confirm('本当に削除しますか？')) {
-                        $.ajax({
-                            url: `/admin/contacts/${currentId}`,
-                            type: 'DELETE',
-                            headers: {
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            },
-                            success: function() {
-                                alert('削除しました');
-                                location.reload();
-                            },
-                            error: function() {
-                                alert('削除に失敗しました');
-                            }
-                        });
-                    }
+                    $('#closeModal').on('click', function() {
+                        $('#detailModal').removeClass('active');
+                    });
+
+                    $('#deleteBtn').on('click', function() {
+                        if (confirm('本当に削除しますか？')) {
+                            $.ajax({
+                                url: `/admin/contacts/${currentId}`,
+                                type: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                success: function() {
+                                    alert('削除しました');
+                                    location.reload();
+                                },
+                                error: function() {
+                                    alert('削除に失敗しました');
+                                }
+                            });
+                        }
+                    });
                 });
             });
         </script>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // 「Previous」「Next」の矢印（SVG）だけ非表示
+            document.querySelectorAll('[aria-label="« Previous"] svg, [aria-label="Next »"] svg').forEach(function(svg) {
+                svg.style.display = "none";
+            });
+        });
+    </script>
 </body>
 
 </html>

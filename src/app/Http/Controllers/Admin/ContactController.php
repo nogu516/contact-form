@@ -45,13 +45,8 @@ class ContactController extends Controller
         return view('admin.contacts.index', compact('contacts'));
     }
 
-    //public function show(Contact $contact){
-    //return response()->json($contact);}
-
     public function show($id)
     {
-        //$contact = Contact::findOrFail($id);
-        //return view('admin.contacts.index', compact('contact'));
         return response()->json(Contact::findOrFail($id));
     }
 
