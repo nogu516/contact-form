@@ -1,41 +1,10 @@
 /* 全体の背景とフォント */
 body {
-    background-color: #f9f1e9;
-    font-family: 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', sans-serif;
+    background-color: #f6f0ea;
+    font-family: 'Hiragino Kaku Gothic ProN', 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-}
-
-.form-wrapper {
-    max-width: 400px;
-    margin: 50px auto;
-    /* 上下50px、左右autoで中央揃え */
-    padding: 40px;
-    background-color: #fffdf9;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.form-wrapper input,
-.form-wrapper select,
-.form-wrapper button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.form-wrapper button {
-    background-color: #6b4c3b;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.form-wrapper button:hover {
-    background-color: #5a4a42;
+    color: #5a4a42;
 }
 
 /* ヘッダーとタイトル */
