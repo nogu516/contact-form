@@ -44,7 +44,7 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         Fortify::loginView(function () {
-            return view('auth.login'); // ← ここでログイン画面を表示
+            return view('admin/contacts.index'); // ← ここでログイン画面を表示
         });
     }
 }

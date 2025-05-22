@@ -19,6 +19,12 @@
         <form method="POST" action="{{ route('login.submit') }}">
             @csrf
 
+            @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @endif
+
             <label for="email">メールアドレス</label>
             <input type="email" name="email" value="{{ old('email') }}" placeholder="例：test@example.com">
             @error('email')

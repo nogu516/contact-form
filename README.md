@@ -10,7 +10,7 @@ Dockerビルド
 
 　＊MySQLは、OSによって起動しない場合があるのでそれぞれのPCに合わせてdocker-compose.ymlファイルを編集してください。
 
-Laravel環境構築 
+Laravel環境構築
 
      1. docker-compose exec php bash
 

@@ -23,17 +23,18 @@ class RegisterRequest extends FormRequest
     {
         // バリデーション
         return [
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
+            'fullName' => ['required', 'string', 'max:255'],
+            //'last_name' => ['required', 'string', 'max:255'],
             'email'    => ['required', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'confirmed', 'min:8'],
+            'password_confirmation' => 'required',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'name.required'     => 'お名前を入力してください',
+            'fullname.required'     => 'お名前を入力してください',
             'email.required'    => 'メールアドレスを入力してください',
             'email.email'       => 'メールアドレスは「ユーザー名@ドメイン」形式で入力してください',
             'password.required' => 'パスワードを入力してください',

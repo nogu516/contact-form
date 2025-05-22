@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}" />
 </head>
@@ -13,7 +14,8 @@
     <div class="container">
         <h2 class="text-center mb-4">Admin</h2>
 
-        <form method="GET" action="{{ route('admin.contacts.index') }}" class="mb-4 d-flex flex-wrap gap-2">
+        <form method="POST" action="{{ route('admin.contacts.index') }}">
+            @csrf
             <input type="text" name="keyword" placeholder="名前かメールアドレスを入力" value="{{ request('keyword') }}">
 
             <select name="gender">
@@ -53,10 +55,10 @@
             <tbody>
                 @foreach($contacts as $contact)
                 <tr>
-                    <td>{{ $contact->fullname }}</td>
+                    <td>{{ $contact->last_name }} {{ $contact->first_name }}</td>
                     <td>{{ $contact->gender }}</td>
                     <td>{{ $contact->email }}</td>
-                    <td>{{ $contact->type }}</td>
+                    <td>{{ $contact->content_type }}</td>
                     <td><button class="detailBtn" data-id="{{ $contact->id }}">詳細</button></td>
                 </tr>
                 @endforeach
@@ -64,72 +66,80 @@
         </table>
 
         <!-- ページネーション -->
-        {{ $contacts->links() }}
-        </>
+        <div class="pagination-wrapper">
+            {{ $contacts->appends(request()->query())->links() }}
 
-        <!-- モーダルウィンドウ -->
-        <div id="detailModal">
-            <div class="modal-content">
-                <button class="close-btn" id="closeModal">×</button>
-                <h2>お問い合わせ詳細</h2>
-                <p><strong>お名前:</strong> <span id="modalName"></span></p>
-                <p><strong>性別:</strong> <span id="modalGender"></span></p>
-                <p><strong>メール:</strong> <span id="modalEmail"></span></p>
-                <p><strong>種類:</strong> <span id="modalType"></span></p>
-                <p><strong>内容:</strong> <span id="modalDetail"></span></p>
-                <button class="delete-btn" id="deleteBtn">削除</button>
+            <!-- モーダルウィンドウ -->
+            <div id="detailModal">
+                <div class="modal-content">
+                    <button class="close-btn" id="closeModal">×</button>
+                    <h2>お問い合わせ詳細</h2>
+                    <p><strong>お名前:</strong> <span id="modalName"></span></p>
+                    <p><strong>性別:</strong> <span id="modalGender"></span></p>
+                    <p><strong>メール:</strong> <span id="modalEmail"></span></p>
+                    <p><strong>種類:</strong> <span id="modalType"></span></p>
+                    <p><strong>内容:</strong> <span id="modalDetail"></span></p>
+                    <button class="delete-btn" id="deleteBtn">削除</button>
+                </div>
             </div>
-        </div>
 
-        <!-- ↓↓↓ jQueryとスクリプトをここに記載 ↓↓↓ -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <!-- ↓↓↓ jQueryとスクリプトをここに記載 ↓↓↓ -->
 
-        <script>
-            $(function() {
-                let currentId = null;
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-                $('.detailBtn').on('click', function() {
-                    const id = $(this).data('id');
-                    currentId = id;
+            <script>
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
 
-                    $.ajax({
-                        url: `/admin/contacts/${id}`,
-                        type: 'GET',
-                        success: function(data) {
-                            $('#modalName').text(data.last_name + ' ' + data.first_name);
-                            $('#modalGender').text(data.gender);
-                            $('#modalEmail').text(data.email);
-                            $('#modalType').text(data.content_type);
-                            $('#modalDetail').text(data.detail);
-                            $('#detailModal').css('display', 'flex');
+                $(function() {
+                    let currentId = null;
+
+                    $('.detailBtn').on('click', function() {
+                        const id = $(this).data('id');
+                        currentId = id;
+
+                        $.ajax({
+                            url: `/admin/contacts/${id}`,
+                            type: 'GET',
+                            success: function(data) {
+                                $('#modalName').text(data.last_name + ' ' + data.first_name);
+                                $('#modalGender').text(data.gender);
+                                $('#modalEmail').text(data.email);
+                                $('#modalType').text(data.content_type);
+                                $('#modalDetail').text(data.detail);
+                                $('#detailModal').css('display', 'flex');
+                            }
+                        });
+                    });
+
+                    $('#closeModal').on('click', function() {
+                        $('#detailModal').css('display', 'none');
+                    });
+
+                    $('#deleteBtn').on('click', function() {
+                        if (confirm('本当に削除しますか？')) {
+                            $.ajax({
+                                url: `/admin/contacts/${currentId}`,
+                                type: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                success: function() {
+                                    alert('削除しました');
+                                    location.reload();
+                                },
+                                error: function() {
+                                    alert('削除に失敗しました');
+                                }
+                            });
                         }
                     });
                 });
-
-                $('#closeModal').on('click', function() {
-                    $('#detailModal').removeClass('active');
-                });
-
-                $('#deleteBtn').on('click', function() {
-                    if (confirm('本当に削除しますか？')) {
-                        $.ajax({
-                            url: `/admin/contacts/${currentId}`,
-                            type: 'DELETE',
-                            headers: {
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            },
-                            success: function() {
-                                alert('削除しました');
-                                location.reload();
-                            },
-                            error: function() {
-                                alert('削除に失敗しました');
-                            }
-                        });
-                    }
-                });
-            });
-        </script>
+            </script>
+        </div>
     </div>
 </body>
 

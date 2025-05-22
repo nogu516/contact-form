@@ -9,10 +9,10 @@ class IsAdmin
 {
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->is_admin) {
-            return $next($request);
+        if (!auth()->user()->is_admin) {
+            abort(403, 'Unauthorized');
         }
 
-        abort(403, 'このページにアクセスする権限がありません');
+        return $next($request);
     }
 }

@@ -16,6 +16,8 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
+        return redirect()->intended('/admin/contacts');
+
         if (!Auth::attempt($credentials)) {
             return back()->withErrors([
                 'email' => '認証情報が正しくありません。',
@@ -24,7 +26,14 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
-        // 管理者かどうかで分岐してもOK（任意）
-        return redirect()->route('admin.contacts.index');
+        // ログインしたユーザー情報を取得
+        $user = Auth::user();
+
+        // 管理者かどうかで遷移先を分岐
+        if ($user->is_admin) {
+            return redirect()->route('admin.contacts.index');
+        }
+
+        return redirect('/'); // 一般ユーザーの場合の遷移先（任意）
     }
 }

@@ -54,7 +54,7 @@ class ContactController extends Controller
     public function destroy($id)
     {
         Contact::findOrFail($id)->delete();
-        return response()->json(['message' => '削除しました']);
+        return response()->json(['status' => 'success']);
     }
 
     public function exportCSV($contacts)

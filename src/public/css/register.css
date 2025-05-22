@@ -13,8 +13,7 @@ header {
     padding: 30px 0 10px;
 }
 
-h1 {
-    text-align: center;
+header h1 {
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -31,6 +30,25 @@ header a {
     border: 1px solid #d9d0c8;
     padding: 4px 10px;
     border-radius: 4px;
+}
+
+/* フォーム全体の枠 */
+.register-container {
+    max-width: 400px;
+    background: white;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+    margin-top: 30px;
+    border: 1px solid #eee;
+}
+
+/* フォーム見出し */
+.register-container h2 {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 /* 各ラベル */
@@ -62,14 +80,6 @@ input::placeholder {
     color: #ccc;
 }
 
-/* エラー */
-.error {
-    color: red;
-    font-size: 13px;
-    margin-top: -15px;
-    margin-bottom: 15px;
-}
-
 /* 登録ボタン */
 button {
     width: 100%;
@@ -80,6 +90,7 @@ button {
     font-size: 14px;
     border-radius: 6px;
     cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
 button:hover {

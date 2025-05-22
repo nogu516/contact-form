@@ -36,4 +36,12 @@ class ContactController extends Controller
         Contact::create($contact);
         return redirect()->route('contacts.thanks');
     }
+
+    public function send(ContactRequest $request)
+    {
+        // バリデーションと保存処理
+
+        // 送信成功後、サンクスページへリダイレクト
+        return redirect()->route('contact.thanks');
+    }
 }
