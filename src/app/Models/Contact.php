@@ -52,10 +52,11 @@ class Contact extends Model
         'email',
         'tel',
         'address',
-        'build',
+        'building',
         'content',
         'content_type',
         'detail',
+        'category_id',
         'updated_at',
         'created_at'
     ];

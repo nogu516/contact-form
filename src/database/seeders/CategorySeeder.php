@@ -21,6 +21,5 @@ class CategorySeeder extends Seeder
             ['name' => 'その他'],
         ]);
 
-        $this->call(CategorySeeder::class);
     }
 }

@@ -16,8 +16,6 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        return redirect()->intended('/admin/contacts');
-
         if (!Auth::attempt($credentials)) {
             return back()->withErrors([
                 'email' => '認証情報が正しくありません。',

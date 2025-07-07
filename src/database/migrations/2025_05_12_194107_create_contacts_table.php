@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
-            //$table->foreignId('category_id')->constrained('categories')->onDelete('cascade'); // 外部キー
 
             $table->string('first_name', 255);
             $table->string('last_name', 255);
@@ -23,7 +22,7 @@ return new class extends Migration
             $table->string('tel', 255);
             $table->string('address', 255);
             $table->string('building', 255)->nullable(); // NULL可にするならnullable()
-            $table->string('build');
+            $table->string('build')->nullable();
             $table->text('content_type');
             $table->text('detail');
             $table->timestamps();
